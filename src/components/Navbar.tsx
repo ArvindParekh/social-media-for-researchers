@@ -13,6 +13,14 @@ export function NavbarRoot() {
    );
 }
 
+function format_count(count: number) {
+   if (count >= 100) {
+      return `${99}+`;
+   } else {
+      return count;
+   }
+}
+
 export function Navbar() {
    const navStates = useRecoilValue(homepageAtom);
 
@@ -34,7 +42,7 @@ export function Navbar() {
             <li>
                <div className='indicator'>
                   <span className='indicator-item badge badge-error'>
-                     {navStates.messageCount}
+                     {format_count(navStates.messageCount)}
                   </span>
                   <button className='btn btn-ghost'>messages</button>
                </div>
@@ -42,7 +50,7 @@ export function Navbar() {
             <li>
                <div className='indicator'>
                   <span className='indicator-item badge badge-error'>
-                     {navStates.notificationCount}
+                     {format_count(navStates.notificationCount)}
                   </span>
                   <button className='btn btn-ghost'>notifications</button>
                </div>
@@ -50,7 +58,7 @@ export function Navbar() {
             <li>
                <div className='indicator'>
                   <span className='indicator-item badge badge-error'>
-                     {navStates.networkCount}
+                     {format_count(navStates.networkCount)}
                   </span>
                   <button className='btn btn-ghost'>connections</button>
                </div>
