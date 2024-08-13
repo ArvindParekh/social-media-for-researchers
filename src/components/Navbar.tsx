@@ -25,13 +25,13 @@ export function Navbar() {
    const navStates = useRecoilValue(homepageAtom);
 
    return (
-      <div className='border-b-2 w-full h-14 py-10 px-6 flex items-center justify-between fixed z-50 overflow-hidden'>
-         <div>
+      <div className='border-b-2 w-full h-fit py-3 px-6 grid grid-cols-3 fixed z-50 overflow-hidden items-stretch border'>
+         <div >
             <span>
                <img src={navStates.profilePic} className='w-10 rounded-xl' />
             </span>
          </div>
-         <span>Name of the App</span>
+         <span className='justify-self-center self-center'>Name of the App</span>
          <ul className='flex gap-10 justify-end items-center'>
             <li>
                <button className='btn'>feed</button>
