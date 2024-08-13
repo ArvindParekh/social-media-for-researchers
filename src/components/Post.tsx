@@ -22,20 +22,30 @@ export function Post({ post }: PostProps) {
                      <img src={post.profilePicture} />
                   </div>
                </div>
-               <div className="text-base-content">
+               <div className='text-base-content'>
                   <p>{post.name}</p>
-                  <p>{post.bio}</p>
-                  <p>{post.time}</p>
+                  <p className='text-xs text-gray-500'>{post.bio}</p>
+                  <p className='text-xs text-gray-500'>{post.time}</p>
                </div>
             </div>
 
             <p className='p-2 my-5 text-sm text-base-content'>{post.body}</p>
             <div className='flex justify-between text-base-content'>
-               <div>likes, comments, reposts icons</div>
-               <div className='flex gap-5'>
-                  <p>{post.reactions.likes}</p>
-                  <p>{post.reactions.comments}</p>
-                  <p>{post.reactions.reposts}</p>
+               <div className='flex stack'>
+                  <p>
+                     <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" className="w-4 rounded-full" />
+                  </p>
+                  <p>
+                     <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" className="w-4 rounded-full" />
+                  </p>
+                  <p>
+                     <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" className="w-4 rounded-full" />
+                  </p>
+               </div>
+               <div className='flex gap-5 text-xs text-gray-500'>
+                  <p>{post.reactions.likes} likes</p>
+                  <p>{post.reactions.comments} comments</p>
+                  <p>{post.reactions.reposts} reposts</p>
                </div>
             </div>
          </div>
