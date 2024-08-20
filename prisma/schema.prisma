@@ -12,3 +12,139 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id                  String        @id @default(cuid())
+  email               String        @unique
+  password            String
+  name                String
+  bio                 String?
+  profileImage        String?
+  institution         String?
+  position            String?
+  sentConnections     Connection[]  @relation("RequestedConnections")
+  receivedConnections Connection[]  @relation("ReceivedConnections")
+  posts               Post[]
+  comments            Comment[]     @relation("UserComments")
+  likes               Like[]        @relation("UserLikes") // Added this field
+  sentMessages        Message[]     @relation("SentMessages")
+  receivedMessages    Message[]     @relation("ReceivedMessages")
+  authoredPublications Publication[] @relation("PublicationAuthors")
+  createdAt           DateTime      @default(now())
+  updatedAt           DateTime      @updatedAt
+}
+
+model Post {
+  id          String   @id @default(cuid())
+  title       String
+  content     String
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    String
+  comments    Comment[]
+  likes       Like[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Connection {
+  id            String @id @default(cuid())
+  requester     User   @relation("RequestedConnections", fields: [requesterId], references: [id])
+  requesterId   String
+  receiver      User   @relation("ReceivedConnections", fields: [receiverId], references: [id])
+  receiverId    String
+  status        ConnectionStatus @default(PENDING)
+  createdAt     DateTime @default(now())
+}
+
+enum ConnectionStatus {
+  PENDING
+  ACCEPTED
+  REJECTED
+}
+
+model Publication {
+  id            String   @id @default(cuid())
+  title         String
+  abstract      String
+  publicationDate DateTime
+  authors       User[]   @relation("PublicationAuthors")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+  author    User     @relation("UserComments", fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+  user      User     @relation("UserLikes", fields: [userId], references: [id]) // Updated relation name
+  userId    String
+  createdAt DateTime @default(now())
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  content   String
+  sender    User     @relation("SentMessages", fields: [senderId], references: [id])
+  senderId  String
+  receiver  User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
+  receiverId String
+  createdAt DateTime @default(now())
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// model Post {
+//   // profilePicture: "https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp",
+//   //     name: "Rohan Joshi",
+//   //     bio: "IIT Madras | Researcher",
+//   //     time: "5h ago",
+//   //     body: "“Indian companies don’t pay for software.” Yet, we’re doing 6-figure $$ in annual recurring revenue (ARR) from our 🇮🇳 Indian customers alone.\nWhile the vast majority of our customers at Clueso (YC W23) are SaaS companies in the US, many of our early adopters were companies in Bengaluru – the city where our engineering team is based.",
+//   //     reactions: {
+//   //        likes: 23000,
+//   //        comments: 10000,
+//   //        reposts: 5000,
+
+//   id Int @id @default(autoincrement())
+//   profilePicture String
+//   name String 
+//   bio String
+//   time DateTime
+//   body String
+//   reactions Reactions
+// }
+
+// model Reactions {
+//   id Int @id @default(autoincrement())
+//   post Post @relation(fields: [postId], references: [id])
+//   postId Int 
+//   likes Int @default(0)
+//   comments Int @default(0)
+//   reposts Int @default(0)
+// }
+
