@@ -22,11 +22,7 @@ export default function RootLayout({
    return (
       <html lang='en' data-theme='light'>
          <body className={inter.className}>
-            <Providers>
-               <NavbarRoot />
-            </Providers>
-
-            {children}
+            <Providers>{children}</Providers>
          </body>
       </html>
    );
