@@ -1,18 +1,28 @@
 "use client";
-
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { Button } from "./ui/button";
 
-export default function Button({ label, action }) {
-   const router = useRouter();
+export default function LoginButton({ provider }: { provider: string }) {
    return (
-      <button
-         className='inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50'
-         onClick={() =>
-            action === "signin" ? signIn(undefined, {callbackUrl: '/dashboard'}) : router.push("/signup")
-         }
-      >
-         {label}
-      </button>
+      <div>
+         {provider === "credentials" ? (
+            <Button
+               className='w-full'
+               onClick={() =>
+                  signIn("credentials", { callbackUrl: "/dashboard" })
+               }
+            >
+               Login
+            </Button>
+         ) : (
+            <Button
+               variant='outline'
+               className='w-full'
+               onClick={() => signIn(provider, { callbackUrl: "/dashboard" })}
+            >
+               Login with {provider.charAt(0).toUpperCase() + provider.slice(1)}
+            </Button>
+         )}
+      </div>
    );
 }

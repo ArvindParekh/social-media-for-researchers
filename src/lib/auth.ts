@@ -4,6 +4,32 @@ import GoogleProvider from "next-auth/providers/google";
 export const authOptions = {
    providers: [
       CredentialsProvider({
+         id: "login",
+         // name: "Email",
+         credentials: {
+            //    username: {
+            //       label: "Username",
+            //       type: "email",
+            //       placeholder: "Enter your Username",
+            //    },
+            //    password: {
+            //       label: "Password",
+            //       type: "password",
+            //       placeholder: "Enter your Password",
+            //    },
+         },
+         async authorize(credentials, req) {
+            console.log(credentials, req);
+
+            //validate user
+
+            return {
+               id: "1",
+            };
+         },
+      }),
+      CredentialsProvider({
+         id: "signup",
          name: "Email",
          credentials: {
             username: {
@@ -39,7 +65,7 @@ export const authOptions = {
    //       return "/dashboard";
    //    },
    // },
-   // pages: {
-   //    signOut: "/bye",
-   // },
+   pages: {
+      signIn: '/signin' //custom signin page
+   },
 };

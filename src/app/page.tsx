@@ -19,10 +19,9 @@ export default function Home() {
                   Connect with fellow researchers, share your work, and
                   collaborate across disciplines. Our platform fosters academic
                   growth, supports collaboration, and helps you stay updated
-                  with the latest discoveries. 
+                  with the latest discoveries.
                </p>
             </div>
-            // Button code
             <div className='flex gap-4'>
                <Button label={"Try it out"} action={"signup"} />
                <Button label={"Login"} action={"signin"} />
