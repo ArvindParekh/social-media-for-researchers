@@ -39,7 +39,11 @@ export function Navbar() {
             <span>
                <img src={navStates.profilePic} className='w-10 rounded-xl' />
             </span>
-            <button onClick={() => signOut()}>LogOut</button>
+            <button
+               onClick={() => signOut({ callbackUrl: "/", redirect: true })}
+            >
+               LogOut
+            </button>
          </div>
          <span className='justify-self-center self-center'>
             Name of the App

@@ -33,4 +33,13 @@ export const authOptions = {
       }),
    ],
    secret: process.env.NEXTAUTH_SECRET,
+   // callbacks: {
+   //    async redirect({ url, baseUrl }) {
+   //       console.log(url, baseUrl);
+   //       return "/dashboard";
+   //    },
+   // },
+   // pages: {
+   //    signOut: "/bye",
+   // },
 };

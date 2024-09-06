@@ -16,10 +16,10 @@ export default function Home() {
                   Researchers <br /> Welcome to your new home.
                </h1>
                <p className='mt-4 font-normal text-base text-neutral-300 max-w-lg text-center mx-auto'>
-                  Spotlight effect is a great way to draw attention to a
-                  specific part of the page. Here, we are drawing the attention
-                  towards the text section of the page. I don&apos;t know why
-                  but I&apos;m running out of copy.
+                  Connect with fellow researchers, share your work, and
+                  collaborate across disciplines. Our platform fosters academic
+                  growth, supports collaboration, and helps you stay updated
+                  with the latest discoveries. 
                </p>
             </div>
             // Button code
