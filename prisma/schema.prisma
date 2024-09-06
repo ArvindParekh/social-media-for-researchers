@@ -27,10 +27,13 @@ model User {
   receivedConnections Connection[]  @relation("ReceivedConnections")
   posts               Post[]
   comments            Comment[]     @relation("UserComments")
-  likes               Like[]        @relation("UserLikes") // Added this field
+  likes               Like[]        @relation("UserLikes")
   sentMessages        Message[]     @relation("SentMessages")
   receivedMessages    Message[]     @relation("ReceivedMessages")
   authoredPublications Publication[] @relation("PublicationAuthors")
+  notifications       Notification[] @relation("UserNotifications")  // Added relation for notifications
+  unreadMessagesCount Int           @default(0)                      // Track unread messages count
+  pendingRequestsCount Int          @default(0)                      // Track pending connection requests
   createdAt           DateTime      @default(now())
   updatedAt           DateTime      @updatedAt
 }
@@ -45,6 +48,26 @@ model Post {
   likes       Like[]
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  content   String
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+  author    User     @relation("UserComments", fields: [authorId], references: [id])
+  authorId  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Like {
+  id        String   @id @default(cuid())
+  post      Post     @relation(fields: [postId], references: [id])
+  postId    String
+  user      User     @relation("UserLikes", fields: [userId], references: [id])
+  userId    String
+  createdAt DateTime @default(now())
 }
 
 model Connection {
@@ -73,26 +96,6 @@ model Publication {
   updatedAt     DateTime @updatedAt
 }
 
-model Comment {
-  id        String   @id @default(cuid())
-  content   String
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    String
-  author    User     @relation("UserComments", fields: [authorId], references: [id])
-  authorId  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Like {
-  id        String   @id @default(cuid())
-  post      Post     @relation(fields: [postId], references: [id])
-  postId    String
-  user      User     @relation("UserLikes", fields: [userId], references: [id]) // Updated relation name
-  userId    String
-  createdAt DateTime @default(now())
-}
-
 model Message {
   id        String   @id @default(cuid())
   content   String
@@ -100,8 +103,28 @@ model Message {
   senderId  String
   receiver  User     @relation("ReceivedMessages", fields: [receiverId], references: [id])
   receiverId String
+  isRead    Boolean  @default(false)  // Track if message is read or not
   createdAt DateTime @default(now())
 }
+
+model Notification {
+  id          String    @id @default(cuid())
+  type        NotificationType
+  message     String
+  user        User      @relation("UserNotifications", fields: [userId], references: [id])
+  userId      String
+  isRead      Boolean   @default(false)  // Track if notification is read or not
+  createdAt   DateTime  @default(now())
+}
+
+enum NotificationType {
+  MESSAGE
+  CONNECTION_REQUEST
+  POST_REACTION
+  COMMENT
+  OTHER
+}
+
 
 
 
