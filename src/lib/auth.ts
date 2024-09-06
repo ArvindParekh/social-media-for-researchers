@@ -28,41 +28,6 @@ export const authOptions = {
             };
          },
       }),
-      CredentialsProvider({
-         id: "signup",
-         name: "Email",
-         credentials: {
-            username: {
-               label: "Username",
-               type: "email",
-               placeholder: "Enter your Username",
-            },
-            password: {
-               label: "Password",
-               type: "password",
-               placeholder: "Enter your Password",
-            },
-            firstName: {
-               label: "First Name",
-               type: "text",
-               placeholder: "Enter your Password",
-            },
-            lastName: {
-               label: "Last Name",
-               type: "text",
-               placeholder: "Enter your Password",
-            },
-         },
-         async authorize(credentials, req) {
-            console.log(credentials, req);
-
-            //validate user
-
-            return {
-               id: "1",
-            };
-         },
-      }),
       GoogleProvider({
          clientId: process.env.GOOGLE_CLIENT_ID ?? "",
          clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
@@ -75,7 +40,7 @@ export const authOptions = {
    //       return "/dashboard";
    //    },
    // },
-   pages: {
-      signIn: "/signin", //custom signin page
-   },
+   // pages: {
+   //    signIn: "/signin", //custom signin page
+   // },
 };
