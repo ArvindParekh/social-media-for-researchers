@@ -5,18 +5,18 @@ export const authOptions = {
    providers: [
       CredentialsProvider({
          id: "login",
-         // name: "Email",
+         name: "Email",
          credentials: {
-            //    username: {
-            //       label: "Username",
-            //       type: "email",
-            //       placeholder: "Enter your Username",
-            //    },
-            //    password: {
-            //       label: "Password",
-            //       type: "password",
-            //       placeholder: "Enter your Password",
-            //    },
+            username: {
+               label: "Username",
+               type: "email",
+               placeholder: "Enter your Username",
+            },
+            password: {
+               label: "Password",
+               type: "password",
+               placeholder: "Enter your Password",
+            },
          },
          async authorize(credentials, req) {
             console.log(credentials, req);
@@ -40,6 +40,16 @@ export const authOptions = {
             password: {
                label: "Password",
                type: "password",
+               placeholder: "Enter your Password",
+            },
+            firstName: {
+               label: "First Name",
+               type: "text",
+               placeholder: "Enter your Password",
+            },
+            lastName: {
+               label: "Last Name",
+               type: "text",
                placeholder: "Enter your Password",
             },
          },
@@ -66,6 +76,6 @@ export const authOptions = {
    //    },
    // },
    pages: {
-      signIn: '/signin' //custom signin page
+      signIn: "/signin", //custom signin page
    },
 };

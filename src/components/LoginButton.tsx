@@ -8,9 +8,7 @@ export default function LoginButton({ provider }: { provider: string }) {
          {provider === "credentials" ? (
             <Button
                className='w-full'
-               onClick={() =>
-                  signIn("credentials", { callbackUrl: "/dashboard" })
-               }
+               onClick={() => signIn("login", { callbackUrl: "/dashboard" })}
             >
                Login
             </Button>
