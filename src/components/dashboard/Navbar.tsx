@@ -5,6 +5,16 @@ import { homepageAtom } from "@/atoms/homePage";
 import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 
+import {
+   DropdownMenu,
+   DropdownMenuContent,
+   DropdownMenuItem,
+   DropdownMenuLabel,
+   DropdownMenuSeparator,
+   DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import Link from "next/link";
+
 export function NavbarRoot() {
    return (
       <>
@@ -36,14 +46,35 @@ export function Navbar() {
    return (
       <div className='border-b-2 w-full h-fit py-3 px-6 grid grid-cols-3 fixed z-50 overflow-hidden items-stretch border'>
          <div>
-            <span>
-               <img src={navStates.profilePic} className='w-10 rounded-xl' />
-            </span>
-            <button
-               onClick={() => signOut({ callbackUrl: "/", redirect: true })}
-            >
-               LogOut
-            </button>
+            {/* <span></span> */}
+            <DropdownMenu>
+               <DropdownMenuTrigger>
+                  <img src={navStates.profilePic} className='w-10 rounded-xl' />
+               </DropdownMenuTrigger>
+               <DropdownMenuContent>
+                  <DropdownMenuLabel>
+                     <Link href='/profile/account'>My Account</Link>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                     <Link href='/profile'>Profile</Link>
+                  </DropdownMenuItem>
+                  {/* <DropdownMenuItem>Billing</DropdownMenuItem> */}
+                  <DropdownMenuItem>
+                     <Link href='/pricing'>Pricing</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                     <button
+                        onClick={() =>
+                           signOut({ callbackUrl: "/", redirect: true })
+                        }
+                     >
+                        LogOut
+                     </button>
+                  </DropdownMenuItem>
+               </DropdownMenuContent>
+            </DropdownMenu>
+
             <span>{JSON.stringify(session)}</span>
          </div>
          <span className='justify-self-center self-center'>
