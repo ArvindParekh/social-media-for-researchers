@@ -1,5 +1,5 @@
-import { Navbar } from "@/components/HomepageNavbar";
-import Button from "@/components/HomepageLoginButton";
+import { Navbar } from "@/components/homepage/HomepageNavbar";
+import Button from "@/components/homepage/HomepageLoginButton";
 import { Spotlight } from "@/components/ui/spotlight";
 
 export default function Home() {

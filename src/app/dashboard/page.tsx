@@ -1,5 +1,5 @@
-import { NavbarRoot } from "@/components/Navbar";
-import PostRoot from "@/components/Post";
+import { NavbarRoot } from "@/components/dashboard/Navbar";
+import PostRoot from "@/components/dashboard/Post";
 
 export default function Dashboard() {
    return (

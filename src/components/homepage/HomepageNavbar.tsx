@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { HoveredLink, Menu, MenuItem, ProductItem } from "./ui/navbar-menu";
+import { HoveredLink, Menu, MenuItem, ProductItem } from "../ui/navbar-menu";
 import { cn } from "@/lib/utils";
 
 export function Navbar({ className }: { className?: string }) {
@@ -15,14 +15,12 @@ export function Navbar({ className }: { className?: string }) {
          <Menu setActive={setActive}>
             <MenuItem setActive={setActive} active={active} item='Services'>
                <div className='flex flex-col space-y-4 text-sm'>
-                  <HoveredLink href='/web-dev'>Web Development</HoveredLink>
-                  <HoveredLink href='/interface-design'>
-                     Interface Design
+                  <HoveredLink href='/dashboard'>Researchers Feed</HoveredLink>
+                  <HoveredLink href='/jobs'>Personalized Jobs</HoveredLink>
+                  <HoveredLink href='/messages'>
+                     One on One Messages
                   </HoveredLink>
-                  <HoveredLink href='/seo'>
-                     Search Engine Optimization
-                  </HoveredLink>
-                  <HoveredLink href='/branding'>Branding</HoveredLink>
+                  <HoveredLink href='/publications'>Publications</HoveredLink>
                </div>
             </MenuItem>
             <MenuItem setActive={setActive} active={active} item='Products'>
