@@ -6,8 +6,6 @@ import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 
 export function NavbarRoot() {
-   const session = useSession();
-
    return (
       <>
          <RecoilRoot>
@@ -16,7 +14,8 @@ export function NavbarRoot() {
 
             {/* Else, show the signup buttons */}
 
-            {session.status === "authenticated" ? <Navbar /> : <Login />}
+            {/* TODO: Show a custom error page if user is not authenticated - oops, looks like you're not authenticated */}
+            <Navbar />
          </RecoilRoot>
       </>
    );
@@ -32,6 +31,7 @@ function format_count(count: number) {
 
 export function Navbar() {
    const navStates = useRecoilValue(homepageAtom);
+   const session = useSession();
 
    return (
       <div className='border-b-2 w-full h-fit py-3 px-6 grid grid-cols-3 fixed z-50 overflow-hidden items-stretch border'>
@@ -44,6 +44,7 @@ export function Navbar() {
             >
                LogOut
             </button>
+            <span>{JSON.stringify(session)}</span>
          </div>
          <span className='justify-self-center self-center'>
             Name of the App
